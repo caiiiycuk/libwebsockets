@@ -944,7 +944,7 @@ __lws_close_free_wsi_final(struct lws *wsi)
 		if (pt->dummy_pipe_fds[0] == wsi->desc.sockfd)
                {
 #if !defined(LWS_PLAT_FREERTOS)
-			pt->dummy_pipe_fds[0] = LWS_SOCK_INVALID;
+			lws_plat_pipe_close(wsi);
 #endif
                }
 	}
@@ -1060,5 +1060,4 @@ lws_close_free_wsi(struct lws *wsi, enum lws_close_status reason, const char *ca
 
 	lws_context_unlock(cx);
 }
-
 
